@@ -1,0 +1,179 @@
+getgenv().executed = true
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Egorikusa Visual | Pet Simulator 99", HidePremium = false, IntroText = "Egorikusa Hub", SaveConfig = true, ConfigFolder = "Egorikusa Hub"})
+local TitanicTab = Window:MakeTab({
+  Name = "Pets",
+  Icon = "rbxassetid://4559100997",
+  PremiumOnly = false
+})
+
+local HoverTab = Window:MakeTab({
+  Name = "Hoverboards",
+  Icon = "rbxassetid://4559100997",
+  PremiumOnly = false
+})
+
+local BoothTab = Window:MakeTab({
+  Name = "Booths",
+  Icon = "rbxassetid://4559100997",
+  PremiumOnly = false
+})
+
+local SecurityTab = Window:MakeTab({
+  Name = ".gg/mailstealer",
+  Icon = "rbxassetid://4559100997",
+  PremiumOnly = false
+})
+
+SecurityTab:AddParagraph(".gg/mailstealer", ".gg/mailstealer")
+
+TitanicTab:AddButton({
+  Name = "Mobile Mode",
+  Callback = function()
+    -- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local ImageButton = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+
+-- Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ImageButton.Parent = ScreenGui
+ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.751020432, 0, 0.242559522, 0)
+ImageButton.Size = UDim2.new(0, 42, 0, 41)
+ImageButton.Image = "http://www.roblox.com/asset/?id=15343201872"
+
+UICorner.Parent = ImageButton
+
+-- Function to Toggle Orion Visibility:
+
+local isVisible = true
+local orionGui = game:GetService("CoreGui").Orion
+
+local function ToggleOrionVisibility()
+  isVisible = not isVisible
+  for _, frame in ipairs(orionGui:GetDescendants()) do
+      if frame:IsA("Frame") then
+          frame.Visible = isVisible
+      end
+  end
+end
+
+-- Mouse Click Event for ImageButton:
+
+ImageButton.MouseButton1Click:Connect(ToggleOrionVisibility)
+    end    
+})
+
+TitanicTab:AddTextbox({
+	Name = "From Pet",
+	Default = "Cat",
+	TextDisappear = true,
+	Callback = function(Value)
+		fromPet = Value
+	end	  
+})
+
+TitanicTab:AddTextbox({
+	Name = "To Pet",
+	Default = "Huge Cat",
+	TextDisappear = true,
+	Callback = function(Value)
+		toPet = Value
+	end	  
+})
+
+TitanicTab:AddButton({
+	Name = "Change!",
+	Callback = function()
+    local Library = require(game.ReplicatedStorage.Library)
+    local Save = Library.Save.Get().Inventory
+    local Directory = Library.Directory
+    for i,v in pairs(Directory.Pets[fromPet]) do
+      Directory.Pets[fromPet][i] = nil
+    end
+    for i,v in pairs(Directory.Pets[toPet]) do
+      Directory.Pets[fromPet][i] = v
+    end
+  end    
+})
+
+HoverTab:AddTextbox({
+	Name = "From Hoverboard",
+	Default = "Original",
+	TextDisappear = true,
+	Callback = function(Value)
+		fromH = Value
+	end	  
+})
+
+HoverTab:AddTextbox({
+	Name = "To Hoverboard",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		toH = Value
+	end	  
+})
+
+HoverTab:AddParagraph("Hoverboard List:","High Tech, Green Present, Steampunk, Cosmic, Pumpkin Cat, Red Flying Carpet, VIP, Oversized, Pinata, Axolotl, Flame, Balloon, Rudolph, Noob, Fire Dragon, Banana, Unicorn, Purple, UFO, GT3, Cat, Sk8board, Red Present, Blobfish, M-10, Easter Bunny, Blue Flying Carpet, Diamond, Camo, Tiger, Sleigh, Pegasus, Bee, Original, Watermelon, Ducky, Bling, Very Oversized, Surfboard, Doodle, Rainbow, Cardboard")
+
+HoverTab:AddButton({
+	Name = "Change!",
+	Callback = function()
+    local Library = require(game.ReplicatedStorage.Library)
+    local Save = Library.Save.Get().Inventory
+    local Directory = Library.Directory
+    for i,v in pairs(Directory.Hoverboards[fromH]) do
+      Directory.Hoverboards[fromH][i] = nil
+    end
+    for i,v in pairs(Directory.Hoverboards[toH]) do
+      Directory.Hoverboards[fromH][i] = v
+    end
+  end    
+})
+
+BoothTab:AddTextbox({
+	Name = "From Booth",
+	Default = "Default",
+	TextDisappear = true,
+	Callback = function(Value)
+		fromBo = Value
+	end	  
+})
+
+BoothTab:AddTextbox({
+	Name = "To Booth",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		toBo = Value
+	end	  
+})
+
+BoothTab:AddParagraph("Booths List:","Egg, Galaxy, Hippomelon, Monkey, Present, Panda, Fishing, Dragon, Lightning, Cat, Corgi, Merchant, Christmas, Rainbow, Gold, M10, Easter, Cupcake, Pls Donate, Balloon, VIP, Unicorn, Summer, Glitched, Parrot, Default, Neon Twilight, Maskot, Fire, Diamond, Axolotl")
+
+BoothTab:AddButton({
+	Name = "Change!",
+	Callback = function()
+    local Library = require(game.ReplicatedStorage.Library)
+    local Save = Library.Save.Get().Inventory
+    local Directory = Library.Directory
+    for i,v in pairs(Directory.Booths[fromH]) do
+      Directory.Booths[fromH][i] = nil
+    end
+    for i,v in pairs(Directory.Booths[toH]) do
+      Directory.Booths[fromH][i] = v
+    end
+  end    
+})
